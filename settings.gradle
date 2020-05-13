@@ -1,0 +1,2 @@
+rootProject.name='NitJsrResults'
+include ':app'
