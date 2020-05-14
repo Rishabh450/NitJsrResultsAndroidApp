@@ -1,5 +1,6 @@
 package com.rishabh.nitjsrresults;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,15 +8,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.rishabh.Adapters.CgAdapter;
 import com.rishabh.nitjsrresults.Models.CgModel;
 import com.rishabh.nitjsrresults.Models.Roll;
 import com.rishabh.nitjsrresults.Models.SemesterCgModel;
+import com.rishabh.nitjsrresults.Models.SemesterModel;
 import com.rishabh.nitjsrresults.Models.StudentProfile;
+import com.rishabh.nitjsrresults.Models.SubjectModel;
 import com.rishabh.nitjsrresults.Utils.APIClient;
 import com.rishabh.nitjsrresults.Utils.APIInterface;
 
@@ -31,8 +39,10 @@ public class Details extends AppCompatActivity {
     String roll;
     TextView name, roll_no, branch, rank;
     List<SemesterCgModel> cg = new ArrayList<>() ;
+    List<List<SubjectModel>> result = new ArrayList<>();
     RecyclerView semres;
     CgAdapter mAdapter;
+    ImageView stud_image;
 
 
     @Override
@@ -46,26 +56,64 @@ public class Details extends AppCompatActivity {
         getProfileData(roll);
         setRecyclerView();
         get_CGPA_list(roll);
+        getResult(roll);
     }
     private void intialiseRetrofit() {
         apiInterface = APIClient.getApiClient().create(APIInterface.class);
     }
     private void setRecyclerView() {
         semres.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new CgAdapter(this,cg);
+        mAdapter = new CgAdapter(this,cg,result);
         semres.setAdapter(mAdapter);
 
     }
     public void init()
     {
+        stud_image = findViewById(R.id.student_image);
         name = findViewById(R.id.name);
         roll_no = findViewById(R.id.roll);
         branch = findViewById(R.id.branch);
         rank = findViewById(R.id.rank);
         semres = findViewById(R.id.semres);
     }
+
+    public void getResult(String roll){
+        Call<List<List<SubjectModel>>> getReportsModelCall = apiInterface.getResultsAllSemester(new Roll(roll.trim()));
+        getReportsModelCall.enqueue(new Callback<List<List<SubjectModel>> >() {
+
+            @Override
+            public void onResponse(Call<List<List<SubjectModel>> > call, Response<List<List<SubjectModel>>> response) {
+
+                result.addAll(response.body());
+                Log.d("recycleer","addedd result");
+                mAdapter.notifyDataSetChanged();
+
+
+
+
+
+
+//                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<List<SubjectModel>> > call, Throwable t) {
+                Log.d("failedhey", String.valueOf(t));
+
+            }
+
+
+        });
+    }
+
     public void showProfile(StudentProfile profile)
     {
+        Log.d("imageurll","https://nilekrator.pythonanywhere.com"+profile.img);
+        Glide.with(Details.this)
+
+
+                .load("https://nilekrator.pythonanywhere.com"+profile.img)
+                .into(stud_image);
         name.setText(profile.getName());
         roll_no.setText(profile.getRoll());
         branch.setText(profile.getBranch());
@@ -110,9 +158,15 @@ public class Details extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<StudentProfile > call, Response<StudentProfile> response) {
-                Log.d("respbodyy",response.body().getRank());
-               StudentProfile studentProfile = new StudentProfile(response.body().name, response.body().roll,response.body().branch,response.body().rank);
-               showProfile(studentProfile);
+                if(response.body()==null)
+                {
+                    Toast.makeText(Details.this,"Invalid Roll Number",Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else {
+                    StudentProfile studentProfile = new StudentProfile(response.body().name, response.body().roll, response.body().branch, response.body().rank, response.body().img);
+                    showProfile(studentProfile);
+                }
 
 
 //                dialog.dismiss();

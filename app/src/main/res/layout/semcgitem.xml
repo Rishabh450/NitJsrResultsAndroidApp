@@ -179,6 +179,20 @@
 
                 </LinearLayout>
             </LinearLayout>
+            <TextView
+                android:id="@+id/view_sem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="View Result"
+                android:layout_below="@+id/basic"
+                android:clickable="true"
+                android:layout_marginTop="20dp"
+                android:background="@color/orange"
+
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
 
         </LinearLayout>
 

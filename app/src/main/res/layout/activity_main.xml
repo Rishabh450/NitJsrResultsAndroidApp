@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/border_margin"
+    android:background="@color/cardview_shadow_end_color"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Roll number"
-        android:layout_marginLeft="@dimen/border_margin"
-        android:textSize="18sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Your Roll Number"
-        android:id="@+id/roll_edit_text"
-        android:layout_margin="@dimen/border_margin"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginTop="10dp"
-        >
+        android:orientation="vertical"
+        android:background="@mipmap/bg"
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:background="@drawable/btn_shape"
-            android:id="@+id/login"
-            style="@style/Widget.AppCompat.Button.Borderless"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Your Roll Number"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+
+            android:gravity="center"
+            android:background="@drawable/backgraedit"
+            android:id="@+id/roll_edit_text"
+
+            android:layout_margin="@dimen/border_margin"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:background="@drawable/btn_shape"
+                android:id="@+id/login"
+                android:textColor="@color/orange"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                />
+        </LinearLayout>
+
     </LinearLayout>
+
+
 </LinearLayout>

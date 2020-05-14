@@ -5,12 +5,14 @@ public class StudentProfile {
    public String roll;
    public String branch;
    public String rank;
+   public String img;
 
-    public StudentProfile(String name, String roll, String branch, String rank) {
+    public StudentProfile(String name, String roll, String branch, String rank,String img) {
         this.name = name;
         this.roll = roll;
         this.branch = branch;
         this.rank = rank;
+        this.img = img;
     }
 
     public String getName() {

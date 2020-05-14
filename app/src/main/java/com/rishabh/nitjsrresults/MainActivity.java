@@ -41,5 +41,6 @@ public class MainActivity extends AppCompatActivity {
     {
         roll_number = findViewById(R.id.roll_edit_text);
         login = findViewById(R.id.login);
+        roll_number.getBackground().setAlpha(60);
     }
 }

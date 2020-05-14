@@ -3,7 +3,9 @@ package com.rishabh.nitjsrresults.Utils;
 import com.rishabh.nitjsrresults.Models.CgModel;
 import com.rishabh.nitjsrresults.Models.Roll;
 import com.rishabh.nitjsrresults.Models.SemesterCgModel;
+import com.rishabh.nitjsrresults.Models.SemesterModel;
 import com.rishabh.nitjsrresults.Models.StudentProfile;
+import com.rishabh.nitjsrresults.Models.SubjectModel;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,10 @@ public interface APIInterface {
     @Headers("Content-Type: application/json")
     @POST("/api/cgpa")
     Call<List<SemesterCgModel>> getAllSemCg(@Body Roll roll);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/results")
+    Call<List<List<SubjectModel>>> getResultsAllSemester(@Body Roll roll);
 
 
 

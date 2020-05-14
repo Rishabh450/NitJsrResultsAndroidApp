@@ -1,16 +1,22 @@
 package com.rishabh.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.rishabh.SemResult;
 import com.rishabh.nitjsrresults.Models.SemesterCgModel;
+import com.rishabh.nitjsrresults.Models.SubjectModel;
 import com.rishabh.nitjsrresults.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -19,10 +25,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CgAdapter extends RecyclerView.Adapter<CgAdapter.MyHolder> {
     private Context context;
     private List<SemesterCgModel> list;
+    List<List<SubjectModel>> result = new ArrayList<>();
 
-    public CgAdapter(Context context, List<SemesterCgModel> list) {
+    public CgAdapter(Context context, List<SemesterCgModel> list, List<List<SubjectModel>> result) {
         this.context = context;
         this.list = list;
+        this.result = result;
     }
 
     @NonNull
@@ -39,6 +47,21 @@ public class CgAdapter extends RecyclerView.Adapter<CgAdapter.MyHolder> {
         holder.sgpa.setText("SGPA: "+list.get(position).sgpa);
         holder.sem.setText("SEMESTER: "+list.get(position).semester);
 
+        holder.view_sem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int semster = Integer.parseInt(list.get(position).semester);
+                Toast.makeText(context,"Clicked",Toast.LENGTH_SHORT).show();
+               // Log.d("resultlist", String.valueOf(result.get(result.size() - semster)));
+                List<SubjectModel> semResults = result.get(result.size() - semster);
+                Intent intent = new Intent(context,SemResult.class);
+                intent.putExtra("list",semResults);
+
+
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -50,7 +73,7 @@ public class CgAdapter extends RecyclerView.Adapter<CgAdapter.MyHolder> {
         public LinearLayout addLayout;
         public TextView sem;
         public TextView cgpa;
-        public TextView sgpa,status;
+        public TextView sgpa,status,view_sem;
 
 
 
@@ -60,6 +83,7 @@ public class CgAdapter extends RecyclerView.Adapter<CgAdapter.MyHolder> {
             cgpa = itemView.findViewById(R.id.cgpa);
             sgpa = itemView.findViewById(R.id.sgpa);
             status = itemView.findViewById(R.id.status);
+            view_sem = itemView.findViewById(R.id.view_sem);
         }
     }
 
