@@ -9,19 +9,39 @@
     android:orientation="vertical"
     >
 
-
-    <TextView
-        android:id="@+id/single_pass_heading"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Student Profile"
-        android:background="@color/orange"
-        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_height="wrap_content">
 
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="21sp" />
+
+        <TextView
+            android:id="@+id/single_pass_heading"
+            android:layout_width="0dp"
+            android:layout_weight="4.4"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/orange"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="Student Profile"
+
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="21sp" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:id="@+id/signout"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:background="@color/orange"
+            android:layout_height="@dimen/toolbar_height"
+            android:padding="5dp"
+            android:src="@drawable/ic_signout"></ImageView>
+
+    </LinearLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

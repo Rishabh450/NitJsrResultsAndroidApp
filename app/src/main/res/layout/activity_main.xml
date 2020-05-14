@@ -8,10 +8,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:id="@+id/root"
         android:background="@mipmap/bg"
 
         android:gravity="center"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:text="Welcome To"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:text="Result Portal"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:text="NIT JAMSHEDPUR"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"
+            android:layout_marginBottom="70dp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_height="wrap_content">
+
+        </TextView>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -28,7 +64,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_marginTop="10dp"
             >
@@ -42,6 +78,20 @@
                 android:textColor="@color/orange"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:text="email at rishabhbhardwaj1234567@gmail.com"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:textSize="12dp"
+                android:clickable="true"
+                android:textIsSelectable="true"
+                android:longClickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_height="wrap_content">
+
+            </TextView>
         </LinearLayout>
 
     </LinearLayout>

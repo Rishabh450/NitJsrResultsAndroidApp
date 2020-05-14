@@ -15,6 +15,7 @@ import com.rishabh.SemResult;
 import com.rishabh.nitjsrresults.Models.SemesterCgModel;
 import com.rishabh.nitjsrresults.Models.SubjectModel;
 import com.rishabh.nitjsrresults.R;
+import com.rishabh.nitjsrresults.Utils.DataWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CgAdapter extends RecyclerView.Adapter<CgAdapter.MyHolder> {
     private Context context;
     private List<SemesterCgModel> list;
+    int min_sem = 1000;
     List<List<SubjectModel>> result = new ArrayList<>();
 
     public CgAdapter(Context context, List<SemesterCgModel> list, List<List<SubjectModel>> result) {
@@ -42,20 +44,28 @@ public class CgAdapter extends RecyclerView.Adapter<CgAdapter.MyHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+
         holder.status.setText("STATUS: "+list.get(position).status);
         holder.cgpa.setText("CGPA: "+list.get(position).cgpa);
         holder.sgpa.setText("SGPA: "+list.get(position).sgpa);
         holder.sem.setText("SEMESTER: "+list.get(position).semester);
+        int semster = Integer.parseInt(list.get(position).semester);
+        if(semster<min_sem)
+            min_sem=semster;
 
         holder.view_sem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int semster = Integer.parseInt(list.get(position).semester);
-                Toast.makeText(context,"Clicked",Toast.LENGTH_SHORT).show();
+                int diff = 0;
+                if(min_sem !=1)
+                    diff = min_sem -1;
+
                // Log.d("resultlist", String.valueOf(result.get(result.size() - semster)));
-                List<SubjectModel> semResults = result.get(result.size() - semster);
+                List<SubjectModel> semResults = result.get(result.size() - semster + diff);
                 Intent intent = new Intent(context,SemResult.class);
-                intent.putExtra("list",semResults);
+                intent.putExtra("list",new DataWrapper(semResults) );
+                intent.putExtra("minsem",min_sem);
 
 
                 context.startActivity(intent);

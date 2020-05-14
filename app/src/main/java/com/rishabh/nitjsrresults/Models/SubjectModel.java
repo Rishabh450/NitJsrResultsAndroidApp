@@ -1,10 +1,12 @@
 package com.rishabh.nitjsrresults.Models;
 
-public class SubjectModel {
-   public String assignment, code,end_sem,grade,internals,mid_sem,name,quiz,total;
+import java.io.Serializable;
+
+public class SubjectModel implements Serializable {
+   public String assignement, code,end_sem,grade,internals,mid_sem,name,quiz,total;
 
     public SubjectModel(String assignment, String code, String end_sem, String grade, String internals, String mid_sem, String name, String quiz, String total) {
-        this.assignment = assignment;
+        this.assignement = assignment;
         this.code = code;
         this.end_sem = end_sem;
         this.grade = grade;
@@ -14,6 +16,8 @@ public class SubjectModel {
         this.quiz = quiz;
         this.total = total;
     }
+
+
 }
 
 /*

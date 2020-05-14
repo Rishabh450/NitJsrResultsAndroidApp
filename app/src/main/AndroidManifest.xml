@@ -10,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoAction"
-        android:usesCleartextTraffic="true">
-        <activity android:name="com.rishabh.SemResult"></activity>
+       >
+        <activity android:name="com.rishabh.SemResult"
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".Details" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -23,5 +24,7 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
 </manifest>

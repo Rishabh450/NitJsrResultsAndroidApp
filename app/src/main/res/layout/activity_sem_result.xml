@@ -4,15 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/qr_background"
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context="com.rishabh.SemResult">
-    <TableLayout
-        android:id="@+id/table"
+    <HorizontalScrollView
         android:layout_width="match_parent"
+        android:scrollbars="horizontal"
         android:layout_height="wrap_content">
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
 
-    </TableLayout>
+            android:layout_height="wrap_content">
+
+        </TableLayout>
+    </HorizontalScrollView>
+
 
 
 </LinearLayout>
