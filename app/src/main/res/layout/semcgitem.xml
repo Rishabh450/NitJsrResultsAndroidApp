@@ -6,8 +6,8 @@
     android:layout_marginLeft="4dp"
     android:layout_marginTop="4dp"
     android:layout_marginRight="4dp"
-    android:background="@color/grey_200"
     android:layout_marginBottom="4dp"
+    android:background="@color/qr_background"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:paddingLeft="8dp"
@@ -15,25 +15,20 @@
     android:paddingRight="8dp"
     android:paddingBottom="8dp">
 
-
     <TextView
-        android:id="@+id/single_pass_heading"
+        android:id="@+id/semno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:text="Student Profile"
-        android:background="@color/orange"
+        android:text="Semester Result"
 
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="13sp" />
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -72,9 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:id="@+id/basic"
-            android:background="@color/qr_background"
-
             android:layout_toRightOf="@+id/single_item_status_layout"
             android:orientation="vertical">
 
@@ -118,14 +110,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Loading..."
-                        android:id="@+id/name"
-                        android:textColor="@color/black_100"
-                        android:textSize="12sp" />
+
 
 
 
@@ -149,8 +134,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Loading"
-                        android:id="@+id/roll"
+                        android:text="Loading..."
+                        android:id="@+id/sgpa"
 
                         android:textColor="@color/black_100"
                         android:textSize="12sp" />
@@ -165,7 +150,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/branch"
+                        android:id="@+id/cgpa"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/poppins_medium"
@@ -186,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Loading..."
-                        android:id="@+id/rank"
+                        android:id="@+id/status"
                         android:textColor="@color/black_100"
                         android:textSize="12sp" />
 
@@ -196,34 +181,7 @@
             </LinearLayout>
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/semper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Semester Wise Performance"
-            android:layout_below="@+id/basic"
-            android:layout_marginTop="20dp"
-            android:background="@color/orange"
-
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:nestedScrollingEnabled="true"
-
-            android:layout_height="match_parent"
-            android:layout_below="@+id/semper"
-            android:id="@+id/semres"
-            />
-
-
 
     </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-
 
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.rishabh.nitjsrresults;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -9,13 +11,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.rishabh.Adapters.CgAdapter;
+import com.rishabh.nitjsrresults.Models.CgModel;
 import com.rishabh.nitjsrresults.Models.Roll;
+import com.rishabh.nitjsrresults.Models.SemesterCgModel;
 import com.rishabh.nitjsrresults.Models.StudentProfile;
 import com.rishabh.nitjsrresults.Utils.APIClient;
 import com.rishabh.nitjsrresults.Utils.APIInterface;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +30,10 @@ public class Details extends AppCompatActivity {
     APIInterface apiInterface;
     String roll;
     TextView name, roll_no, branch, rank;
+    List<SemesterCgModel> cg = new ArrayList<>() ;
+    RecyclerView semres;
+    CgAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +44,17 @@ public class Details extends AppCompatActivity {
         roll = getIntent().getStringExtra("roll");
         Log.d("rolll",roll+" ");
         getProfileData(roll);
+        setRecyclerView();
+        get_CGPA_list(roll);
     }
     private void intialiseRetrofit() {
         apiInterface = APIClient.getApiClient().create(APIInterface.class);
+    }
+    private void setRecyclerView() {
+        semres.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new CgAdapter(this,cg);
+        semres.setAdapter(mAdapter);
+
     }
     public void init()
     {
@@ -44,6 +62,7 @@ public class Details extends AppCompatActivity {
         roll_no = findViewById(R.id.roll);
         branch = findViewById(R.id.branch);
         rank = findViewById(R.id.rank);
+        semres = findViewById(R.id.semres);
     }
     public void showProfile(StudentProfile profile)
     {
@@ -53,6 +72,36 @@ public class Details extends AppCompatActivity {
         rank.setText(profile.getRank());
     }
 
+    private void get_CGPA_list(String roll)
+    {
+        Call<List<SemesterCgModel>> getReportsModelCall = apiInterface.getAllSemCg(new Roll(roll.trim()));
+        getReportsModelCall.enqueue(new Callback<List<SemesterCgModel>>() {
+
+            @Override
+            public void onResponse(Call<List<SemesterCgModel> > call, Response<List<SemesterCgModel>> response) {
+
+                cg.addAll(response.body());
+                Log.d("recycleer","addedd");
+                mAdapter.notifyDataSetChanged();
+
+
+
+
+
+//                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<SemesterCgModel>> call, Throwable t) {
+                Log.d("failedhey", String.valueOf(t));
+
+            }
+
+
+        });
+
+
+    }
     private void getProfileData(String roll)
     {
 
