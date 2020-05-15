@@ -1,7 +1,9 @@
 package com.rishabh.nitjsrresults;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -24,8 +27,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.rishabh.Adapters.CgAdapter;
 import com.rishabh.nitjsrresults.Fragments.HomePage;
+import com.rishabh.nitjsrresults.Fragments.LeaderBoard;
 import com.rishabh.nitjsrresults.Models.CgModel;
 import com.rishabh.nitjsrresults.Models.Roll;
 import com.rishabh.nitjsrresults.Models.SemesterCgModel;
@@ -45,11 +51,11 @@ import java.util.List;
 
 import static com.rishabh.nitjsrresults.Utils.Utilities.createAlertDialog;
 
-public class Details extends AppCompatActivity {
+public class Details extends AppCompatActivity  {
     APIInterface apiInterface;
     public static String roll;
     TextView name, roll_no, branch, rank;
-    List<SemesterCgModel> cg = new ArrayList<>() ;
+  public static   List<SemesterCgModel> cg = new ArrayList<>() ;
     List<List<SubjectModel>> result = new ArrayList<>();
     RecyclerView semres;
     CgAdapter mAdapter;
@@ -58,7 +64,7 @@ public class Details extends AppCompatActivity {
     public static String roll2;
     ImageView signout;
 
-
+    BottomNavigationView bott;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +74,41 @@ public class Details extends AppCompatActivity {
 
         roll = getIntent().getStringExtra("roll");
         roll2 =roll;
-
+        bott = findViewById(R.id.navigationView);
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
 
         //do somthing
         HomePage homePage=new HomePage();
         fragmentTransaction.replace(R.id.container,homePage);
         fragmentTransaction.commit();
+        bott.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                FragmentManager fragmentManager=getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+
+                switch (menuItem.getItemId()) {
+                    case R.id.homepage:
+
+                        cg.clear();
+                        result.clear();
+                        HomePage booksAvailable=new HomePage();
+                        fragmentTransaction.replace(R.id.container,booksAvailable);
+                        fragmentTransaction.commit();
+                        break;
+                    case R.id.rank:
+
+                        LeaderBoard leaderBoard=new LeaderBoard();
+                        fragmentTransaction.replace(R.id.container,leaderBoard);
+                        fragmentTransaction.commit();
+                        break;
+
+
+                }
+                return true ;
+            }
+        });
+
 
     }
     private void intialiseRetrofit() {

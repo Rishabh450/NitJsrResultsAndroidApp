@@ -35,8 +35,8 @@ public interface APIInterface {
     Call<List<List<SubjectModel>>> getResultsAllSemester(@Body Roll roll);
 
     @Headers("Content-Type: application/json")
-    @POST("/api/results")
-    Call<List<List<RankOutputModel>>> getRankList(@Body RankModel rankModel);
+    @POST("/api/rank")
+    Call<List<RankOutputModel>> getRankList(@Body RankModel rankModel);
 
 
 

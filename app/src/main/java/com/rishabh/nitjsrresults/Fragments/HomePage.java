@@ -35,6 +35,7 @@ import com.rishabh.nitjsrresults.Utils.SharedPrefferenceManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.rishabh.nitjsrresults.Details.cg;
 import static com.rishabh.nitjsrresults.Utils.Utilities.createAlertDialog;
 
 
@@ -42,7 +43,7 @@ public class HomePage extends Fragment {
     APIInterface apiInterface;
     String roll;
     TextView name, roll_no, branch, rank;
-    List<SemesterCgModel> cg = new ArrayList<>() ;
+
     List<List<SubjectModel>> result = new ArrayList<>();
     RecyclerView semres;
     CgAdapter mAdapter;
@@ -50,6 +51,7 @@ public class HomePage extends Fragment {
     int minsem = 10000;
     String roll2;
     ImageView signout;
+
 
 /*
     HomePage (String roll,String roll2)
@@ -162,6 +164,7 @@ public class HomePage extends Fragment {
             public void onResponse(Call<List<SemesterCgModel> > call, Response<List<SemesterCgModel>> response) {
 
                 cg.addAll(response.body());
+
                 Log.d("recycleer","addedd");
                 mAdapter.notifyDataSetChanged();
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/homepage"
+        android:icon="@drawable/ic_action_name"
+        android:title="Home"
+        app:showAsAction="always"/>
+
+
+        <item
+            android:id="@+id/rank"
+            android:icon="@drawable/leader"
+            android:title="LeaderBoard"
+            app:showAsAction="always"/>
+
+
+
+
+
+</menu>
