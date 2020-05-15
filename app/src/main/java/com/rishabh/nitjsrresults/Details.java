@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,22 +60,29 @@ public class Details extends AppCompatActivity  {
     List<List<SubjectModel>> result = new ArrayList<>();
     RecyclerView semres;
     CgAdapter mAdapter;
+    public static ProgressBar progressBar;
     ImageView stud_image;
     int minsem = 10000;
     public static String roll2;
     ImageView signout;
 
-    BottomNavigationView bott;
+
+   public static BottomNavigationView bott;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
         setContentView(R.layout.activity_details);
+        progressBar =findViewById(R.id.progress);
+        progressBar.setIndeterminate(true);
+        progressBar.setScaleY(2.5f);
 
+        progressBar.setVisibility(View.VISIBLE);
         roll = getIntent().getStringExtra("roll");
         roll2 =roll;
         bott = findViewById(R.id.navigationView);
+        bott.setVisibility(View.GONE);
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
 
         //do somthing
@@ -89,7 +97,7 @@ public class Details extends AppCompatActivity  {
 
                 switch (menuItem.getItemId()) {
                     case R.id.homepage:
-
+                        bott.setVisibility(View.GONE);
                         cg.clear();
                         result.clear();
                         HomePage booksAvailable=new HomePage();
@@ -97,7 +105,7 @@ public class Details extends AppCompatActivity  {
                         fragmentTransaction.commit();
                         break;
                     case R.id.rank:
-
+                        bott.setVisibility(View.GONE);
                         LeaderBoard leaderBoard=new LeaderBoard();
                         fragmentTransaction.replace(R.id.container,leaderBoard);
                         fragmentTransaction.commit();
@@ -172,6 +180,8 @@ public class Details extends AppCompatActivity  {
         roll_no.setText(profile.getRoll());
         branch.setText(profile.getBranch());
         rank.setText(profile.getRank());
+
+
     }
 
     private void get_CGPA_list(String roll)

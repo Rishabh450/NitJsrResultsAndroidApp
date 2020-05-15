@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,7 +36,11 @@ import com.rishabh.nitjsrresults.Utils.APIInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.rishabh.nitjsrresults.Details.bott;
+
+
 import static com.rishabh.nitjsrresults.Details.roll;
+import static com.rishabh.nitjsrresults.Fragments.HomePage.ide;
 
 
 public class LeaderBoard extends Fragment {
@@ -47,7 +52,7 @@ public class LeaderBoard extends Fragment {
     ArrayList<String> semester = new ArrayList<>();
     Button getrank;
     Spinner methodspin,spinner2;
-
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +61,9 @@ public class LeaderBoard extends Fragment {
         View view= inflater.inflate(R.layout.fragment_leader_board, container, false);
         tableLayout = view.findViewById(R.id.ranktable);
         getrank = view.findViewById(R.id.getrank);
+        progressBar = view.findViewById(R.id.progress);
+        progressBar.setScaleY(2.5f);
+
         methodspin = (Spinner) view. findViewById(R.id.method);
         intialiseRetrofit();
         for(int i = 0; i< Details. cg.size();i++)
@@ -78,6 +86,9 @@ public class LeaderBoard extends Fragment {
         getrank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bott.setVisibility(View.GONE);
+
+                progressBar.setVisibility(View.VISIBLE);
                 tableLayout.removeAllViews();
                 tableLayout.removeAllViewsInLayout();
                 rankOutputModelList.clear();
@@ -108,6 +119,8 @@ public class LeaderBoard extends Fragment {
             @Override
             public void onResponse(Call<List<RankOutputModel> > call, Response<List<RankOutputModel>> response) {
                 rankOutputModelList.addAll(response.body());
+                bott.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
 
                 TableRow row = new TableRow(getContext());
 
@@ -134,9 +147,16 @@ public class LeaderBoard extends Fragment {
                     Log.d("rankdetailss",rank.rank);
                     tv2.setText(rank.rank);
                     tv2.setTextSize(18);
-                    tv2.setTextColor(getResources().getColor(R.color.black_100));
+                    if(rank.name.equals(ide)) {
+                        tv2.setTextColor(getResources().getColor(R.color.white));
+                        tv2.setBackgroundResource(R.drawable.textborder2);
+                    }
+                    else {
+                        tv2.setBackgroundResource(R.drawable.textborder);
+                        tv2.setTextColor(getResources().getColor(R.color.black_100));
+                    }
                     tv2.setPadding(20,20,20,20);
-                    tv2.setBackgroundResource(R.drawable.textborder);
+
                     row1.addView(tv2);
                     ImageView imageView = new ImageView(getContext());
                     imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -149,16 +169,32 @@ public class LeaderBoard extends Fragment {
                     row1.addView(imageView);
                     TextView tv3 = new TextView(getContext());
                     tv3.setText(rank.name);
+
+                    if(rank.name.equals(ide)) {
+                        tv3.setTextColor(getResources().getColor(R.color.white));
+                        tv3.setBackgroundResource(R.drawable.textborder2);
+                    }
+                    else {
+                        tv3.setBackgroundResource(R.drawable.textborder);
+                        tv3.setTextColor(getResources().getColor(R.color.black_100));
+                    }
                     tv3.setTextSize(18);
-                    tv3.setTextColor(getResources().getColor(R.color.black_100));
+
                     tv3.setPadding(20,20,20,20);
-                    tv3.setBackgroundResource(R.drawable.textborder);
+
                     row1.addView(tv3);
                     TextView tv4 = new TextView(getContext());
                     tv4.setText(rank.marks);
-                    tv4.setTextColor(getResources().getColor(R.color.black_100));
+                    if(rank.name.equals(ide)) {
+                        tv4.setTextColor(getResources().getColor(R.color.white));
+                        tv4.setBackgroundResource(R.drawable.textborder2);
+                    }
+                    else {
+                        tv4.setBackgroundResource(R.drawable.textborder);
+                        tv4.setTextColor(getResources().getColor(R.color.black_100));
+                    }
                     tv4.setPadding(20,20,20,20);
-                    tv4.setBackgroundResource(R.drawable.textborder);
+
                     row1.addView(tv4);
 
                     tableLayout.addView(row1);

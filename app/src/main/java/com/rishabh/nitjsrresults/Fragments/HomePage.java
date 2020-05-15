@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,9 @@ import com.rishabh.nitjsrresults.Utils.SharedPrefferenceManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.rishabh.nitjsrresults.Details.bott;
 import static com.rishabh.nitjsrresults.Details.cg;
+import static com.rishabh.nitjsrresults.Details.progressBar;
 import static com.rishabh.nitjsrresults.Utils.Utilities.createAlertDialog;
 
 
@@ -43,6 +46,8 @@ public class HomePage extends Fragment {
     APIInterface apiInterface;
     String roll;
     TextView name, roll_no, branch, rank;
+    int flag1,flag2,flag3;
+    ProgressBar progressBar;
 
     List<List<SubjectModel>> result = new ArrayList<>();
     RecyclerView semres;
@@ -51,6 +56,7 @@ public class HomePage extends Fragment {
     int minsem = 10000;
     String roll2;
     ImageView signout;
+    public static String ide;
 
 
 /*
@@ -120,6 +126,8 @@ public class HomePage extends Fragment {
         signout =view. findViewById(R.id.signout);
         stud_image =view. findViewById(R.id.student_image);
         name = view. findViewById(R.id.name);
+        progressBar = view.findViewById(R.id.progress);
+        progressBar.setScaleY(2.5f);
         roll_no = view. findViewById(R.id.roll);
         branch = view. findViewById(R.id.branch);
         rank = view. findViewById(R.id.rank);
@@ -134,6 +142,7 @@ public class HomePage extends Fragment {
             public void onResponse(Call<List<List<SubjectModel>> > call, Response<List<List<SubjectModel>>> response) {
 
                 result.addAll(response.body());
+                flag1=1;
                 Log.d("recycleer","addedd result");
                 mAdapter.notifyDataSetChanged();
 
@@ -164,6 +173,10 @@ public class HomePage extends Fragment {
             public void onResponse(Call<List<SemesterCgModel> > call, Response<List<SemesterCgModel>> response) {
 
                 cg.addAll(response.body());
+                flag2=1;
+                bott.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
 
                 Log.d("recycleer","addedd");
                 mAdapter.notifyDataSetChanged();
@@ -195,6 +208,7 @@ public class HomePage extends Fragment {
 
                 .load("https://nilekrator.pythonanywhere.com"+profile.img)
                 .into(stud_image);
+        ide = profile.getName().substring(profile.getName().indexOf(':')+1).toUpperCase().trim()+" ("+roll.trim().toUpperCase()+")";
         name.setText(profile.getName());
         roll_no.setText(profile.getRoll());
         branch.setText(profile.getBranch());
@@ -216,6 +230,7 @@ public class HomePage extends Fragment {
                     getActivity().finish();
                 }
                 else {
+                    flag3=1;
                     SharedPrefferenceManager.getInstance(getContext()).put(SharedPrefferenceManager.Key.LOGIN_STATUS, roll2);
                     String log = SharedPrefferenceManager.getInstance(getContext()).getString(SharedPrefferenceManager.Key.LOGIN_STATUS);
                     Log.d("sharedpreflog",log+" ");
