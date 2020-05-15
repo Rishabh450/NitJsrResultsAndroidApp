@@ -1,6 +1,8 @@
 package com.rishabh.nitjsrresults.Utils;
 
 import com.rishabh.nitjsrresults.Models.CgModel;
+import com.rishabh.nitjsrresults.Models.RankModel;
+import com.rishabh.nitjsrresults.Models.RankOutputModel;
 import com.rishabh.nitjsrresults.Models.Roll;
 import com.rishabh.nitjsrresults.Models.SemesterCgModel;
 import com.rishabh.nitjsrresults.Models.SemesterModel;
@@ -31,6 +33,10 @@ public interface APIInterface {
     @Headers("Content-Type: application/json")
     @POST("/api/results")
     Call<List<List<SubjectModel>>> getResultsAllSemester(@Body Roll roll);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/results")
+    Call<List<List<RankOutputModel>>> getRankList(@Body RankModel rankModel);
 
 
 
