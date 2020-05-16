@@ -99,6 +99,7 @@ public class HomePage extends Fragment {
                     public void onClick(View v) {
                         dialog.dismiss();
                         SharedPrefferenceManager.getInstance(getContext()).put(SharedPrefferenceManager.Key.LOGIN_STATUS, "");
+                        cg.clear();
                         startActivity(new Intent(getContext(), MainActivity.class));
                         getActivity(). finish();
 
@@ -227,7 +228,9 @@ public class HomePage extends Fragment {
                 {
                     Toast.makeText(getContext(),"Invalid Roll Number",Toast.LENGTH_SHORT).show();
                     SharedPrefferenceManager.getInstance(getContext()).put(SharedPrefferenceManager.Key.LOGIN_STATUS, "");
-                    getActivity().finish();
+                    cg.clear();
+                    startActivity(new Intent(getContext(),MainActivity.class));
+
                 }
                 else {
                     flag3=1;

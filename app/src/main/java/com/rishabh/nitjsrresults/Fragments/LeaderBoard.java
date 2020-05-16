@@ -33,6 +33,8 @@ import com.rishabh.nitjsrresults.R;
 import com.rishabh.nitjsrresults.Utils.APIClient;
 import com.rishabh.nitjsrresults.Utils.APIInterface;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +55,8 @@ public class LeaderBoard extends Fragment {
     Button getrank;
     Spinner methodspin,spinner2;
     ProgressBar progressBar;
+    double  total,count;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -144,7 +148,9 @@ public class LeaderBoard extends Fragment {
                     TableRow row1 = new TableRow(getContext());
                     RankOutputModel rank= new RankOutputModel(rankOutputModelList.get(i).img,rankOutputModelList.get(i).marks,rankOutputModelList.get(i).name,rankOutputModelList.get(i).rank) ;
                     TextView tv2 = new TextView(getContext());
-                    Log.d("rankdetailss",rank.rank);
+
+                    total = total + Double.parseDouble(rank.marks.trim());
+                    count++;
                     tv2.setText(rank.rank);
                     tv2.setTextSize(18);
                     if(rank.name.equals(ide)) {
@@ -199,6 +205,32 @@ public class LeaderBoard extends Fragment {
 
                     tableLayout.addView(row1);
                 }
+                TableRow avg = new TableRow(getContext());
+                TextView tv = new TextView(getContext());
+                tv.setText(String.valueOf("Avg Score"));
+                tv.setTextSize(18);
+                tv.setTextColor(getResources().getColor(R.color.white));
+                tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+                tv.setPadding(20,20,20,20);
+
+                tv.setBackgroundResource(R.drawable.textborder2);
+
+                avg.addView(tv);
+                Double aver = total/count;
+                Double truncatedDouble = BigDecimal.valueOf(aver)
+                        .setScale(3, RoundingMode.HALF_UP)
+                        .doubleValue();
+                TextView tv1 = new TextView(getContext());
+                tv1.setText(String.valueOf(truncatedDouble) );
+                tv1.setTextSize(18);
+                tv1.setTextColor(getResources().getColor(R.color.white));
+                tv1.setTypeface(tv.getTypeface(), Typeface.BOLD);
+                tv1.setPadding(20,20,20,20);
+
+                tv1.setBackgroundResource(R.drawable.textborder2);
+                avg.addView(tv1);
+                tableLayout.addView(avg,0);
+
 
 
 
