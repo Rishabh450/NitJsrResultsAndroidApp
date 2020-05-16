@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:textSize="20sp"
     android:gravity="left"
+    android:fontFamily="@font/poppins"
     android:textColor="#FF0000"
     android:padding="5dip"
     />

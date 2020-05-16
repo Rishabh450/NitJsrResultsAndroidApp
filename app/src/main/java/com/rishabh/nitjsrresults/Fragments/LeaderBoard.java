@@ -1,8 +1,10 @@
 package com.rishabh.nitjsrresults.Fragments;
 
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,6 +58,7 @@ public class LeaderBoard extends Fragment {
     Spinner methodspin,spinner2;
     ProgressBar progressBar;
     double  total,count;
+    Typeface face;
 
 
     @Override
@@ -67,6 +70,8 @@ public class LeaderBoard extends Fragment {
         getrank = view.findViewById(R.id.getrank);
         progressBar = view.findViewById(R.id.progress);
         progressBar.setScaleY(2.5f);
+         face = ResourcesCompat.getFont(getContext(), R.font.poppins_light);
+
 
         methodspin = (Spinner) view. findViewById(R.id.method);
         intialiseRetrofit();
@@ -81,6 +86,9 @@ public class LeaderBoard extends Fragment {
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner); // The drop down view
         methodspin .setAdapter(spinnerArrayAdapter);
          spinner2 = (Spinner) view. findViewById(R.id.semester);
+
+        methodspin.getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+        spinner2 .getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
 
 // Application of the Array to the Spinner
         ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(getContext(),   R.layout.spinner , semester);
@@ -128,11 +136,14 @@ public class LeaderBoard extends Fragment {
 
                 TableRow row = new TableRow(getContext());
 
-                String[] attr = {"Rank","Image","Name","Score"};
+                String[] attr = {"Rank","Photo","Name","Score"};
                 for(int i =0;i<attr.length;i++) {
                     TextView tv = new TextView(getContext());
                     tv.setText(attr[i]);
                     tv.setTextSize(18);
+
+                    tv.setTypeface(face);
+
                     tv.setTextColor(getResources().getColor(R.color.black_100));
                     tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
                     tv.setPadding(20,20,20,20);
@@ -153,6 +164,8 @@ public class LeaderBoard extends Fragment {
                     count++;
                     tv2.setText(rank.rank);
                     tv2.setTextSize(18);
+
+                    tv2.setTypeface(face);
                     if(rank.name.equals(ide)) {
                         tv2.setTextColor(getResources().getColor(R.color.white));
                         tv2.setBackgroundResource(R.drawable.textborder2);
@@ -176,6 +189,8 @@ public class LeaderBoard extends Fragment {
                     TextView tv3 = new TextView(getContext());
                     tv3.setText(rank.name);
 
+                    tv3.setTypeface(face);
+
                     if(rank.name.equals(ide)) {
                         tv3.setTextColor(getResources().getColor(R.color.white));
                         tv3.setBackgroundResource(R.drawable.textborder2);
@@ -191,6 +206,8 @@ public class LeaderBoard extends Fragment {
                     row1.addView(tv3);
                     TextView tv4 = new TextView(getContext());
                     tv4.setText(rank.marks);
+
+                    tv4.setTypeface(face);
                     if(rank.name.equals(ide)) {
                         tv4.setTextColor(getResources().getColor(R.color.white));
                         tv4.setBackgroundResource(R.drawable.textborder2);
@@ -209,6 +226,8 @@ public class LeaderBoard extends Fragment {
                 TextView tv = new TextView(getContext());
                 tv.setText(String.valueOf("Avg Score"));
                 tv.setTextSize(18);
+
+                tv.setTypeface(face);
                 tv.setTextColor(getResources().getColor(R.color.white));
                 tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
                 tv.setPadding(20,20,20,20);
@@ -223,6 +242,8 @@ public class LeaderBoard extends Fragment {
                 TextView tv1 = new TextView(getContext());
                 tv1.setText(String.valueOf(truncatedDouble) );
                 tv1.setTextSize(18);
+
+                tv1.setTypeface(face);
                 tv1.setTextColor(getResources().getColor(R.color.white));
                 tv1.setTypeface(tv.getTypeface(), Typeface.BOLD);
                 tv1.setPadding(20,20,20,20);

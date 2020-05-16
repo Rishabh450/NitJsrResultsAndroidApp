@@ -36,11 +36,13 @@
             android:clickable="true"
             android:focusable="true"
 
+
             android:layout_height="@dimen/toolbar_height"
             app:itemIconTint="@android:color/white"
             app:itemTextColor="@android:color/white"
 
             android:background="@color/colorPrimaryDark"
+
 
 
             app:labelVisibilityMode="labeled"
