@@ -183,7 +183,7 @@
                 android:id="@+id/view_sem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="View Marks"
                 android:layout_below="@+id/basic"
                 android:clickable="true"
