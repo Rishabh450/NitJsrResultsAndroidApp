@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.rishabh.Adapters.CgAdapter;
@@ -174,7 +175,11 @@ public class Details extends AppCompatActivity  {
         Glide.with(Details.this)
 
 
+
                 .load("https://nilekrator.pythonanywhere.com"+profile.img)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+
                 .into(stud_image);
         name.setText(profile.getName());
         roll_no.setText(profile.getRoll());

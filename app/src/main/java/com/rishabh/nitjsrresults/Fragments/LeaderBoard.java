@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -25,6 +26,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rishabh.SemResult;
 import com.rishabh.nitjsrresults.Details;
 import com.rishabh.nitjsrresults.Models.RankModel;
@@ -178,13 +180,21 @@ public class LeaderBoard extends Fragment {
 
                     row1.addView(tv2);
                     ImageView imageView = new ImageView(getContext());
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
+
+
                     Glide.with(getContext())
 
 
                             .load(rank.img)
                             .fitCenter()
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .placeholder(R.drawable.ic_account_box_black_50dp)
+                            .skipMemoryCache(true)
                             .into(imageView);
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
                     row1.addView(imageView);
                     TextView tv3 = new TextView(getContext());
                     tv3.setText(rank.name);
@@ -206,6 +216,7 @@ public class LeaderBoard extends Fragment {
                     row1.addView(tv3);
                     TextView tv4 = new TextView(getContext());
                     tv4.setText(rank.marks);
+                    tv4.setTextSize(18);
 
                     tv4.setTypeface(face);
                     if(rank.name.equals(ide)) {

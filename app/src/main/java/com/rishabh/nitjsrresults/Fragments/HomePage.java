@@ -97,9 +97,10 @@ public class HomePage extends Fragment {
                 dialog.findViewById(R.id.dialog_continue).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        cg.clear();
                         dialog.dismiss();
                         SharedPrefferenceManager.getInstance(getContext()).put(SharedPrefferenceManager.Key.LOGIN_STATUS, "");
-                        cg.clear();
+
                         startActivity(new Intent(getContext(), MainActivity.class));
                         getActivity(). finish();
 
