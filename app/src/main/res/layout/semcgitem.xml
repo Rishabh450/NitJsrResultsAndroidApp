@@ -189,7 +189,6 @@
                 android:clickable="true"
                 android:layout_marginTop="20dp"
                 android:background="@color/orange"
-
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
