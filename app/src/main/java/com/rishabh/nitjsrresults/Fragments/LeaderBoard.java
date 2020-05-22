@@ -53,7 +53,7 @@ public class LeaderBoard extends Fragment {
 
     TableLayout tableLayout;
     APIInterface apiInterface;
-    List<RankOutputModel> rankOutputModelList = new ArrayList<>();
+    public static List<RankOutputModel> rankOutputModelList = new ArrayList<RankOutputModel>();
     String[] method = {"sgpa","cgpa"};
     ArrayList<String> semester = new ArrayList<>();
     Button getrank;
@@ -147,7 +147,12 @@ public class LeaderBoard extends Fragment {
                     tv.setTypeface(face);
 
                     tv.setTextColor(getResources().getColor(R.color.black_100));
-                    tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+                    try {
+                        tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     tv.setPadding(20,20,20,20);
 
                     tv.setBackgroundResource(R.drawable.textborder);

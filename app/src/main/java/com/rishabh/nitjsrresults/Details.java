@@ -57,8 +57,8 @@ public class Details extends AppCompatActivity  {
     APIInterface apiInterface;
     public static String roll;
     TextView name, roll_no, branch, rank;
-  public static   List<SemesterCgModel> cg = new ArrayList<>() ;
-    List<List<SubjectModel>> result = new ArrayList<>();
+  public static   List<SemesterCgModel> cg = new ArrayList<SemesterCgModel>() ;
+   public static List<List<SubjectModel>> result = new ArrayList<List<SubjectModel>>();
     RecyclerView semres;
     CgAdapter mAdapter;
     public static ProgressBar progressBar;
@@ -88,7 +88,7 @@ public class Details extends AppCompatActivity  {
 
         //do somthing
         HomePage homePage=new HomePage();
-        fragmentTransaction.replace(R.id.container,homePage);
+        fragmentTransaction.add(R.id.container,homePage);
         fragmentTransaction.commit();
         bott.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -72,8 +72,9 @@ public class HomePage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for getContext() fragment
         View v =inflater.inflate(R.layout.fragment_home_page, container, false);
-        intialiseRetrofit();
         init(v);
+        intialiseRetrofit();
+
         roll = Details.roll;
         roll2 =roll;
 
